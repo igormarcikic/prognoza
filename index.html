@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+    <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js
+    "></script>
+    <script src="./app.js"></script>
+    <script src="./getServis.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        img{
+            width: 30px;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-controller="mainController">
+    
+    <div class="container">
+    <table class="table table-hover table-dark table-bordered table-striped">
+        <tr>
+            <th colspan="2">{{weather.city_name}}</th>
+            <th colspan="3">{{weather.country_code}}</th>
+        </tr>
+        <tr ng-repeat="sve in weather.data">
+            <td>Za datum: <br> {{sve.valid_date}}</td>
+            <td>Maksimalna dnevna temperatura: <br> {{sve.max_temp | celsius}}</td>
+            <td>Minimalna dnevna temperatura: <br> {{sve.min_temp | celsius}}</td>
+            <td>Subjektivni osecaj: <br> {{(sve.app_max_temp + sve.app_min_temp)/2 | number:2 | celsius}}</td>
+            <td><img ng-src="https://www.weatherbit.io/static/img/icons/{{sve.weather.icon}}.png"></td>
+        </tr>
+    </table>
+    
+            <canvas id="line" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-series="series" chart-options="options"
+            chart-dataset-override="datasetOverride" chart-click="onClick">
+            </canvas>
+    </div>
+</body>
+</html>
